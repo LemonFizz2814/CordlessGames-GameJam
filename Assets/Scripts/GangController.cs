@@ -10,7 +10,7 @@ public class GangController : MonoBehaviour
         Dogs,
     }
 
-    public class AIPool
+    public class AIData
     {
         public Gangs gang;
 
@@ -19,45 +19,95 @@ public class GangController : MonoBehaviour
         public List<GameObject> aiPoolUsed;
         public List<GameObject> aiPoolWaiting;
 
-        public AIPool(Gangs _gang, GameObject _prefab, List<GameObject> _aiPoolUsed, List<GameObject> _aiPoolWaiting)
+        public Transform spawnLocations;
+
+        public AIData(Gangs _gang, GameObject _prefab, List<GameObject> _aiPoolUsed, List<GameObject> _aiPoolWaiting, Transform _spawnLocations)
         {
             gang = _gang;
             prefab = _prefab;
             aiPoolUsed = _aiPoolUsed;
             aiPoolWaiting = _aiPoolWaiting;
+            spawnLocations = _spawnLocations;
         }
     }
 
+    [Header("References")]
     public GameObject catPrefab;
     public GameObject dogPrefab;
 
+    public Transform catSpawnLocs;
+    public Transform dogSpawnLocs;
+
     public Transform poolParent;
 
-    AIPool catPool;
-    AIPool dogPool;
+    AIData catPool;
+    AIData dogPool;
 
-    List<AIPool> pooling = new List<AIPool>();
+    List<AIData> aiData = new List<AIData>();
 
+    [Header("AI Spawning Settings")]
     public int totalAIPerGang;
+    public float spawnWait;
+    public float spawningClusterMin;
+    public float spawningClusterMax;
 
     private void Start()
     {
-        catPool = new AIPool(Gangs.Cats, catPrefab, new List<GameObject>(), new List<GameObject>());
-        dogPool = new AIPool(Gangs.Dogs, dogPrefab, new List<GameObject>(), new List<GameObject>());
+        catPool = new AIData(Gangs.Cats, catPrefab, new List<GameObject>(), new List<GameObject>(), catSpawnLocs);
+        dogPool = new AIData(Gangs.Dogs, dogPrefab, new List<GameObject>(), new List<GameObject>(), dogSpawnLocs);
 
-        pooling.Add(catPool);
-        pooling.Add(dogPool);
+        aiData.Add(catPool);
+        aiData.Add(dogPool);
 
-        for (int i = 0; i < 2; i++)
+        for (int gang = 0; gang < 2; gang++)
         {
             for (int j = 0; j < totalAIPerGang; j++)
             {
-                var aiObj = Instantiate(pooling[i].prefab, new Vector3(0, 0, 0), Quaternion.identity);
-                aiObj.transform.SetParent(poolParent.GetChild(i));
+                var aiObj = Instantiate(aiData[gang].prefab, new Vector3(0, 0, 0), Quaternion.identity);
+                aiObj.transform.SetParent(poolParent.GetChild(gang));
                 aiObj.transform.localPosition = new Vector3(0, 0, 0);
 
-                pooling[i].aiPoolWaiting.Add(aiObj);
+                aiData[gang].aiPoolWaiting.Add(aiObj);
             }
+
+            aiSpawnLoop(gang);
+        }
+    }
+
+    private IEnumerator aiSpawnLoop(int _gang)
+    {
+        yield return new WaitForSeconds(spawnWait);
+
+        float cluster = 0;
+
+        if (aiData[_gang].aiPoolWaiting.Count != 0)
+        {
+            if (aiData[_gang].aiPoolWaiting.Count < spawningClusterMax)
+            {
+                cluster = aiData[_gang].aiPoolWaiting.Count;
+            }
+            else
+            { cluster = Random.Range(spawningClusterMin, spawningClusterMax); }
+        }
+
+        SpawnInAI(_gang, cluster);
+
+        aiSpawnLoop(_gang);
+    }
+
+    void SpawnInAI(int _gang, float _cluster)
+    {
+        Transform spawnLocation = aiData[_gang].spawnLocations.GetChild(Random.Range(0, aiData[_gang].spawnLocations.childCount));
+
+        for (int i = 0; i < _cluster; i++)
+        {
+            //remove from waiting and add to 
+            var store = aiData[_gang].aiPoolWaiting[0];
+            aiData[_gang].aiPoolWaiting.RemoveAt(0);
+            aiData[_gang].aiPoolUsed.Add(store);
+
+            //set position
+            aiData[_gang].aiPoolUsed[aiData[_gang].aiPoolUsed.Count - 1].transform.localPosition = spawnLocation.position;
         }
     }
 }
