@@ -106,8 +106,42 @@ public class GangController : MonoBehaviour
             aiData[_gang].aiPoolWaiting.RemoveAt(0);
             aiData[_gang].aiPoolUsed.Add(store);
 
+            var newPos = new Vector3(spawnLocation.position.x + Random.Range(-1.0f, 1.0f), spawnLocation.position.y, spawnLocation.position.z + Random.Range(-1.0f, 1.0f));
+
             //set position
-            aiData[_gang].aiPoolUsed[aiData[_gang].aiPoolUsed.Count - 1].transform.localPosition = spawnLocation.position;
+            var gangMember = aiData[_gang].aiPoolUsed[aiData[_gang].aiPoolUsed.Count - 1];
+            gangMember.transform.localPosition = newPos;
+            gangMember.GetComponent<AIScript>().SpawnedIn(this);
         }
+    }
+
+    public void RemoveAI(int _gang, GameObject _obj)
+    {
+        if(aiData[_gang].aiPoolUsed.Contains(_obj))
+        {
+            var index = aiData[_gang].aiPoolUsed.IndexOf(_obj);
+
+            var store = aiData[_gang].aiPoolUsed[index];
+            aiData[_gang].aiPoolUsed.RemoveAt(index);
+            aiData[_gang].aiPoolWaiting.Add(store);
+        }
+    }
+
+    public List<GameObject> GetGangMembers(int _gang)
+    {
+        return aiData[_gang].aiPoolUsed;
+    }
+
+    public int GetOppositeGangFaction(int _gang)
+    {
+        switch((Gangs)_gang)
+        {
+            case Gangs.Cats:
+                return (int)Gangs.Dogs;
+            case Gangs.Dogs:
+                return (int)Gangs.Cats;
+        }
+
+        return 0;
     }
 }

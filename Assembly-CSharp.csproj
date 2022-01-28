@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AIProperties.cs" />
     <Compile Include="Assets\Scripts\AIScript.cs" />
+    <Compile Include="Assets\Scripts\BulletPool.cs" />
     <Compile Include="Assets\Scripts\GangController.cs" />
     <Compile Include="Assets\Scripts\MainMenuCanvas.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
