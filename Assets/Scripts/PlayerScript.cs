@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Rigidbody body;
+
+    float horizontal;
+    float vertical;
+    float moveLimiter = 0.7f;
+
+    public float runSpeed = 20.0f;
+
     void Start()
     {
-        
+        body = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // Gives a value between -1 and 1
+        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+    }
+
+    void FixedUpdate()
+    {
+        if (horizontal != 0 && vertical != 0) // Check for diagonal movement
+        {
+            // limit movement speed diagonally, so you move at 70% speed
+            horizontal *= moveLimiter;
+            vertical *= moveLimiter;
+        }
+
+        body.velocity = new Vector3(horizontal * runSpeed, 0, vertical * runSpeed);
     }
 }
