@@ -36,7 +36,7 @@ public class GangController : MonoBehaviour
     AIPool catPool;
     AIPool dogPool;
 
-    List<AIPool> pooling;
+    List<AIPool> pooling = new List<AIPool>();
 
     public int totalAIPerGang;
 
@@ -53,7 +53,9 @@ public class GangController : MonoBehaviour
             for (int j = 0; j < totalAIPerGang; j++)
             {
                 var aiObj = Instantiate(pooling[i].prefab, new Vector3(0, 0, 0), Quaternion.identity);
-                aiObj.transform.SetParent(poolParent);
+                aiObj.transform.SetParent(poolParent.GetChild(i));
+                aiObj.transform.localPosition = new Vector3(0, 0, 0);
+
                 pooling[i].aiPoolWaiting.Add(aiObj);
             }
         }
