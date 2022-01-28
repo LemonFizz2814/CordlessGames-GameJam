@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    Rigidbody body;
+    private Rigidbody body;
 
-    float horizontal;
-    float vertical;
-    float moveLimiter = 0.7f;
+    private float horizontal;
+    private float vertical;
 
+    public float moveLimiter = 0.7f;    //Percentage
     public float runSpeed = 20.0f;
 
     void Start()
@@ -20,8 +20,21 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         // Gives a value between -1 and 1
-        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
-        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+        horizontal = Input.GetAxis("Horizontal"); // -1 is left
+        vertical = Input.GetAxis("Vertical"); // -1 is down
+
+        //Shoot Gun
+        if (Input.GetMouseButton(0))    //Left Click
+        {
+            GameObject bullet = BulletPool.SharedInstance.GetBullet();
+
+            if (bullet != null)
+            {
+                bullet.transform.position = transform.position;
+                bullet.transform.rotation = transform.rotation;
+                bullet.SetActive(true);
+            }
+        }
     }
 
     void FixedUpdate()
