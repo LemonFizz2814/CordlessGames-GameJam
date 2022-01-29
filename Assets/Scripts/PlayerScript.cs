@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
 
     //Player's Camera
     public Camera PlayerCam;
+    public GameObject Gun;
 
     //Movement
     public float moveLimiter = 0.7f;    //Percentage
@@ -34,32 +35,23 @@ public class PlayerScript : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal"); // -1 is left
         vertical = Input.GetAxis("Vertical"); // -1 is down
 
+        VScreen.x = Input.mousePosition.x;
+        VScreen.y = Input.mousePosition.y;
+        VScreen.z = PlayerCam.transform.position.z;
+
+        //Rotate to always face the mouse
+        Vector3 LookDirection = PlayerCam.ScreenToWorldPoint(VScreen);
+        PhysicalMouse.transform.position = new Vector3(LookDirection.x, transform.position.y, LookDirection.z);
+
         //Shoot Gun
-        if (Input.GetMouseButton(0))    //Left Click
+        if (Input.GetMouseButtonDown(0))    //Left Click
         {
-            BulletPool.SharedInstance.Shoot(this.gameObject, new Vector3(1, 0, 0));
+            transform.LookAt(PhysicalMouse.transform);
 
-            //GameObject bullet = BulletPool.SharedInstance.GetBullet();
+            Vector3 ShootDirection = PhysicalMouse.transform.position - transform.position;
+            ShootDirection = Vector3.Normalize(ShootDirection);
 
-            //if (bullet != null)
-            //{
-            //    bullet.transform.position = transform.position;
-            //    bullet.transform.rotation = transform.rotation;
-            //    bullet.SetActive(true);
-
-            //    VScreen.x = Input.mousePosition.x;
-            //    VScreen.y = Input.mousePosition.y;
-            //    VScreen.z = PlayerCam.transform.position.z;
-
-            //    //Rotate to always face the mouse
-            //    Vector3 Direction = PlayerCam.ScreenToWorldPoint(VScreen);
-
-            //    PhysicalMouse.transform.position = new Vector3(Direction.x, transform.position.y, Direction.z);
-
-            //    transform.LookAt(PhysicalMouse.transform);
-
-            //    bullet.GetComponent<Rigidbody>().AddForce(transform.right * BulletForce, ForceMode.Impulse);
-            //}
+            BulletPool.SharedInstance.Shoot(Gun, ShootDirection);
         }
     }
 
