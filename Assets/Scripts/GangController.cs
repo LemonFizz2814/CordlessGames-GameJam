@@ -34,6 +34,7 @@ public class GangController : MonoBehaviour
     [Header("References")]
     public GameObject catPrefab;
     public GameObject dogPrefab;
+    public BulletPool bulletPool;
 
     public Transform catSpawnLocs;
     public Transform dogSpawnLocs;
@@ -110,7 +111,7 @@ public class GangController : MonoBehaviour
             //set position
             var gangMember = aiData[_gang].aiPoolUsed[aiData[_gang].aiPoolUsed.Count - 1];
             gangMember.transform.position = newPos;
-            gangMember.GetComponent<AIScript>().SpawnedIn(this);
+            gangMember.GetComponent<AIScript>().SpawnedIn(this, bulletPool);
         }
     }
 
