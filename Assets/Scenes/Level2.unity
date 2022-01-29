@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: b76ccb629cf268440927e022ae4ecc43, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ea71ad23f86fa9145b364154049188c2, type: 2}
 --- !u!1 &1060136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,26 +1338,26 @@ Transform:
   m_Children:
   - {fileID: 750413006}
   - {fileID: 2084299737}
+  - {fileID: 816674636}
   - {fileID: 244766169}
   - {fileID: 1059384737}
   - {fileID: 976814699}
   - {fileID: 1877268742}
-  - {fileID: 816674636}
   - {fileID: 1538594748}
   - {fileID: 1962479191}
-  - {fileID: 1990392626}
   - {fileID: 1296991265}
-  - {fileID: 238833574}
-  - {fileID: 135399757}
+  - {fileID: 1990392626}
   - {fileID: 1482264139}
+  - {fileID: 135399757}
   - {fileID: 1762465071}
-  - {fileID: 1925321313}
+  - {fileID: 238833574}
   - {fileID: 769629391}
+  - {fileID: 1925321313}
   - {fileID: 457323148}
   - {fileID: 2036945506}
-  - {fileID: 857029658}
   - {fileID: 822925781}
   - {fileID: 2124809806}
+  - {fileID: 857029658}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2160,7 +2160,7 @@ Transform:
   m_LocalScale: {x: 10, y: 2.66063, z: 0.3853502}
   m_Children: []
   m_Father: {fileID: 417933887}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &769629392
 BoxCollider:
@@ -2253,7 +2253,7 @@ Transform:
   m_LocalScale: {x: 10, y: 2.66063, z: 0.3853502}
   m_Children: []
   m_Father: {fileID: 417933887}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &816674637
 BoxCollider:
@@ -3539,7 +3539,7 @@ Transform:
   m_LocalScale: {x: 10, y: 2.66063, z: 0.3853502}
   m_Children: []
   m_Father: {fileID: 417933887}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1296991266
 BoxCollider:
@@ -3891,7 +3891,7 @@ Transform:
   m_LocalScale: {x: 10, y: 2.66063, z: 0.3853502}
   m_Children: []
   m_Father: {fileID: 417933887}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1482264140
 BoxCollider:
@@ -4531,7 +4531,7 @@ Transform:
   m_LocalScale: {x: 10, y: 2.66063, z: 0.3853502}
   m_Children: []
   m_Father: {fileID: 417933887}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1762465072
 BoxCollider:
