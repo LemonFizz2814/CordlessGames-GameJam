@@ -9,6 +9,9 @@ public class BulletPool : MonoBehaviour
     public GameObject objecttoPool;
     public int amounttoPool;
 
+    //Bullets
+    public float BulletForce = 2.0f;
+
     private void Awake()
     {
         SharedInstance = this;
@@ -40,5 +43,19 @@ public class BulletPool : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void Shoot(GameObject Parent, Vector3 Direction)
+    {
+        GameObject bullet = BulletPool.SharedInstance.GetBullet();
+
+        if (bullet != null)
+        {
+            bullet.transform.position = Parent.transform.position;
+            bullet.transform.rotation = Parent.transform.rotation;
+            bullet.SetActive(true);
+
+            bullet.GetComponent<Rigidbody>().AddForce(Direction * BulletForce, ForceMode.Impulse);
+        }
     }
 }
