@@ -12,7 +12,7 @@ public class MainMenuCanvas : MonoBehaviour
 
     public void PlayBTN()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("level"));
     }
 
     public void QuitBTN()
