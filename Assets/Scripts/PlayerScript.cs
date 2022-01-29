@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour
 
     private GameObject PhysicalMouse;
 
+    public UIManager uiManager;
+
     private Vector3 VScreen = new Vector3();
 
     //Player's Camera
@@ -20,6 +22,9 @@ public class PlayerScript : MonoBehaviour
     //Movement
     public float moveLimiter = 0.7f;    //Percentage
     public float runSpeed = 20.0f;
+
+    bool milk;
+    bool bone;
 
     void Start()
     {
@@ -65,5 +70,38 @@ public class PlayerScript : MonoBehaviour
         }
 
         body.velocity = new Vector3(horizontal * runSpeed, 0, vertical * runSpeed);
+    }
+
+    public bool GetMilk()
+    {
+        return milk;
+    }
+    public bool GetBone()
+    {
+        return bone;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Milk") && !milk && !bone)
+        {
+            milk = true;
+            uiManager.PickedUpImage(1);
+            Destroy(other.gameObject);
+        }
+        if(other.CompareTag("Bone") && !milk && !bone)
+        {
+            bone = true;
+            uiManager.PickedUpImage(2);
+            Destroy(other.gameObject);
+        }
+        if(other.CompareTag("CatBoss") && milk)
+        {
+            milk = false;
+        }
+        if(other.CompareTag("DogBoss") && bone)
+        {
+            bone = false;
+        }
     }
 }
