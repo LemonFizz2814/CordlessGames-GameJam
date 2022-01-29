@@ -55,7 +55,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            transform.LookAt(hit.point);
+            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
     }
 
