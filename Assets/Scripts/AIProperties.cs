@@ -11,6 +11,8 @@ public class AIProperties : MonoBehaviour
     public float speed;
     public float damage;
     public float maxHealth;
+    public float attackDelayMin;
+    public float attackDelayMax;
 
     public int burstMin;
     public int burstMax;

@@ -47,9 +47,9 @@ public class GangController : MonoBehaviour
 
     [Header("AI Spawning Settings")]
     public int totalAIPerGang;
+    public int spawningClusterMin;
+    public int spawningClusterMax;
     public float spawnWait;
-    public float spawningClusterMin;
-    public float spawningClusterMax;
 
     private void Start()
     {
@@ -70,14 +70,12 @@ public class GangController : MonoBehaviour
                 aiData[gang].aiPoolWaiting.Add(aiObj);
             }
 
-            aiSpawnLoop(gang);
+            StartCoroutine(aiSpawnLoop(gang));
         }
     }
 
     private IEnumerator aiSpawnLoop(int _gang)
     {
-        yield return new WaitForSeconds(spawnWait);
-
         float cluster = 0;
 
         if (aiData[_gang].aiPoolWaiting.Count != 0)
@@ -92,7 +90,8 @@ public class GangController : MonoBehaviour
 
         SpawnInAI(_gang, cluster);
 
-        aiSpawnLoop(_gang);
+        yield return new WaitForSeconds(spawnWait);
+        StartCoroutine(aiSpawnLoop(_gang));
     }
 
     void SpawnInAI(int _gang, float _cluster)
@@ -106,11 +105,11 @@ public class GangController : MonoBehaviour
             aiData[_gang].aiPoolWaiting.RemoveAt(0);
             aiData[_gang].aiPoolUsed.Add(store);
 
-            var newPos = new Vector3(spawnLocation.position.x + Random.Range(-1.0f, 1.0f), spawnLocation.position.y, spawnLocation.position.z + Random.Range(-1.0f, 1.0f));
+            var newPos = new Vector3(spawnLocation.position.x + Random.Range(-0.5f, 0.5f), spawnLocation.position.y, spawnLocation.position.z + Random.Range(-0.5f, 0.5f));
 
             //set position
             var gangMember = aiData[_gang].aiPoolUsed[aiData[_gang].aiPoolUsed.Count - 1];
-            gangMember.transform.localPosition = newPos;
+            gangMember.transform.position = newPos;
             gangMember.GetComponent<AIScript>().SpawnedIn(this);
         }
     }

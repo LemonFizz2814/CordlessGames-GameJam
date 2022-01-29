@@ -10,7 +10,8 @@ public class AIScript : MonoBehaviour
     enum DecisionStates
     {
         Walking,
-        Shooting,
+        ShootingAI,
+        ShootingPlayer,
         Fleeing,
         Dead,
     }
@@ -29,10 +30,23 @@ public class AIScript : MonoBehaviour
     bool active = false;
     float health;
 
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        properties = GetComponent<AIProperties>();
+
+        active = false;
+        //agent.isStopped = true;
+        agent.enabled = false;
+        gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         if(active && decision == DecisionStates.Walking)
         {
+            //print("for gang members");
+
             GameObject nearestGangMember = null;
             float closest = Mathf.Infinity;
 
@@ -48,9 +62,15 @@ public class AIScript : MonoBehaviour
 
             if (nearestGangMember != null)
             {
-                if (Physics.Linecast(transform.position, nearestGangMember.transform.position, layerMask))
+                RaycastHit hit;
+                string oppositeGangName = ((GangController.Gangs)gangController.GetOppositeGangFaction((int)properties.gang)).ToString();
+
+                if (Physics.Linecast(transform.position, nearestGangMember.transform.position, out hit))
                 {
-                    Attack(nearestGangMember.transform);
+                    if (hit.transform.CompareTag(oppositeGangName))
+                    {
+                        StartCoroutine(Attack(nearestGangMember.transform));
+                    }
                 }
             }
         }
@@ -59,25 +79,43 @@ public class AIScript : MonoBehaviour
     public void SpawnedIn(GangController _gangController)
     {
         active = true;
-        agent.isStopped = false;
-        health = properties.maxHealth;
+
+        agent.enabled = true;
+        gameObject.SetActive(true);
+
+        health      = properties.maxHealth;
+        agent.speed = properties.speed;
+
         gangController = _gangController;
-        PickTargetPosition();
+        StartCoroutine(PickTargetPosition());
     }
 
-    void Attack(Transform _attackTarget)
+    IEnumerator Attack(Transform _attackTarget)
     {
-        decision = DecisionStates.Shooting;
+        decision = DecisionStates.ShootingAI;
+        yield return new WaitForSeconds(Random.Range(properties.attackDelayMin, properties.attackDelayMax));
+
+        agent.isStopped = true;
         attackTarget = _attackTarget;
+
+        print("ATTACK!!!!");
     }
 
-    void PickTargetPosition()
+    IEnumerator PickTargetPosition()
     {
+        yield return new WaitForSeconds(1);
+
         decision = DecisionStates.Walking;
         var oppositeGang = gangController.GetGangMembers(gangController.GetOppositeGangFaction((int)properties.gang));
-        walkTarget = oppositeGang[Random.Range(0, oppositeGang.Count)].transform;
 
-        agent.SetDestination(walkTarget.position);
+        if (oppositeGang.Count > 0)
+        {
+            walkTarget = oppositeGang[Random.Range(0, oppositeGang.Count)].transform;
+
+            agent.isStopped = false;
+            agent.SetDestination(walkTarget.position);
+            print("my pos " + transform.position + " target pos " + walkTarget.position);
+        }
     }
 
     public void HitByBullet(float _damage)
@@ -98,7 +136,9 @@ public class AIScript : MonoBehaviour
     void AIDied()
     {
         active = false;
-        agent.isStopped = true;
+        //agent.isStopped = true;
+        agent.enabled = false;
+        gameObject.SetActive(false);
         gangController.RemoveAI((int)properties.gang, gameObject);
     }
 }

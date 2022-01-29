@@ -9,12 +9,23 @@ public class PlayerScript : MonoBehaviour
     private float horizontal;
     private float vertical;
 
+    private GameObject PhysicalMouse;
+
+    private Vector3 VScreen = new Vector3();
+
+    //Player's Camera
+    public Camera PlayerCam;
+
+    //Movement
     public float moveLimiter = 0.7f;    //Percentage
     public float runSpeed = 20.0f;
 
     void Start()
     {
         body = GetComponent<Rigidbody>();
+
+        PhysicalMouse = new GameObject();
+        PhysicalMouse.name = "PhysicalMouse";
     }
 
     void Update()
@@ -26,14 +37,29 @@ public class PlayerScript : MonoBehaviour
         //Shoot Gun
         if (Input.GetMouseButton(0))    //Left Click
         {
-            GameObject bullet = BulletPool.SharedInstance.GetBullet();
+            BulletPool.SharedInstance.Shoot(this.gameObject, new Vector3(1, 0, 0));
 
-            if (bullet != null)
-            {
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
-                bullet.SetActive(true);
-            }
+            //GameObject bullet = BulletPool.SharedInstance.GetBullet();
+
+            //if (bullet != null)
+            //{
+            //    bullet.transform.position = transform.position;
+            //    bullet.transform.rotation = transform.rotation;
+            //    bullet.SetActive(true);
+
+            //    VScreen.x = Input.mousePosition.x;
+            //    VScreen.y = Input.mousePosition.y;
+            //    VScreen.z = PlayerCam.transform.position.z;
+
+            //    //Rotate to always face the mouse
+            //    Vector3 Direction = PlayerCam.ScreenToWorldPoint(VScreen);
+
+            //    PhysicalMouse.transform.position = new Vector3(Direction.x, transform.position.y, Direction.z);
+
+            //    transform.LookAt(PhysicalMouse.transform);
+
+            //    bullet.GetComponent<Rigidbody>().AddForce(transform.right * BulletForce, ForceMode.Impulse);
+            //}
         }
     }
 
