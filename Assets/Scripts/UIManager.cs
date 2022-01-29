@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -9,12 +10,14 @@ public class UIManager : MonoBehaviour
     public GameObject gameplayScreen;
     public GameObject gameoverScreen;
     public GameObject winScreen;
+    public GameObject heartObj;
 
     public TextMeshProUGUI infoText;
 
     public Image pickUpImage;
 
     public Sprite[] pickUpSprites;
+    public Sprite[] heartSprites;
 
     void Start()
     {
@@ -28,6 +31,14 @@ public class UIManager : MonoBehaviour
     public void PickedUpImage(int _i)
     {
         pickUpImage.sprite = pickUpSprites[_i];
+    }
+
+    public void UpdateHeartImages(float _health)
+    {
+        for(int i = 0; i < heartObj.transform.childCount; i++)
+        {
+            heartObj.transform.GetChild(i).GetComponent<Image>().sprite = (i >= _health) ? heartSprites[0] : heartSprites[1];
+        }
     }
 
     public void ShowWinScreen()
@@ -45,5 +56,19 @@ public class UIManager : MonoBehaviour
     {
         infoText.GetComponent<Animation>().Play();
         infoText.text = _string;
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void NextLevel()
+    {
+        PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("level") + 1);
+        SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("level"));
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("level"));
     }
 }

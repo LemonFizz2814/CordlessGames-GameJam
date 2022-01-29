@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuCanvas : MonoBehaviour
 {
+    private void Start()
+    {
+        PlayerPrefs.SetInt("level", 1);
+    }
+
     public void PlayBTN()
     {
         SceneManager.LoadScene(1);

@@ -12,21 +12,28 @@ public class PlayerScript : MonoBehaviour
     public UIManager uiManager;
 
     public GameObject Gun;
+    public GameObject arrowObj;
+
+    public Transform[] bossLocations;
 
     //Movement
     public float moveLimiter = 0.7f;    //Percentage
     public float runSpeed = 20.0f;
 
+    int gangArrowPoint;
+
     bool milk;
     bool bone;
     bool milkDelivered;
     bool boneDelivered;
+    bool arrow;
 
-    float health = 5;
+    float health = 3;
 
     void Start()
     {
         body = GetComponent<Rigidbody>();
+        ShowArrow(false, 0);
     }
 
     void Update()
@@ -39,6 +46,12 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))    //Left Click
         {
             BulletPool.SharedInstance.Shoot(Gun, Gun.transform.forward);
+        }
+
+        if(arrow)
+        {
+            Vector3 pos = new Vector3(bossLocations[gangArrowPoint].position.x, 0, bossLocations[gangArrowPoint].position.z);
+            arrowObj.transform.LookAt(pos);
         }
     }
 
@@ -63,6 +76,13 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void ShowArrow(bool _show, int _boss)
+    {
+        arrowObj.SetActive(_show);
+        arrow = _show;
+        gangArrowPoint = _boss;
+    }
+
     public bool GetMilk()
     {
         return milk;
@@ -74,6 +94,7 @@ public class PlayerScript : MonoBehaviour
     public void HitByBullet(float _damage)
     {
         health -= _damage;
+        uiManager.UpdateHeartImages(health);
 
         HealthCheck();
     }
@@ -83,6 +104,7 @@ public class PlayerScript : MonoBehaviour
         if (health <= 0)
         {
             uiManager.ShowGameOverScreen();
+            Time.timeScale = 0;
         }
     }
 
@@ -93,6 +115,7 @@ public class PlayerScript : MonoBehaviour
             milk = true;
             uiManager.PickedUpImage(1);
             uiManager.TextAnimation("Picked up milk");
+            ShowArrow(true, 0);
             Destroy(other.gameObject);
         }
         if (other.CompareTag("Bone") && !milk && !bone)
@@ -100,6 +123,7 @@ public class PlayerScript : MonoBehaviour
             bone = true;
             uiManager.PickedUpImage(2);
             uiManager.TextAnimation("Picked up bone");
+            ShowArrow(true, 1);
             Destroy(other.gameObject);
         }
         if (other.CompareTag("CatBoss") && milk)
@@ -108,6 +132,7 @@ public class PlayerScript : MonoBehaviour
             uiManager.PickedUpImage(0);
             milk = false;
             milkDelivered = true;
+            ShowArrow(false, 0);
         }
         if (other.CompareTag("DogBoss") && bone)
         {
@@ -115,6 +140,7 @@ public class PlayerScript : MonoBehaviour
             uiManager.PickedUpImage(0);
             bone = false;
             boneDelivered = true;
+            ShowArrow(false, 0);
         }
         if (other.CompareTag("Start") && milkDelivered && boneDelivered)
         {
