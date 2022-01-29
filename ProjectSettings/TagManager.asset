@@ -8,6 +8,10 @@ TagManager:
   - Dogs
   - BulletPool
   - Bullet
+  - Milk
+  - DogBoss
+  - CatBoss
+  - Bone
   layers:
   - Default
   - TransparentFX
