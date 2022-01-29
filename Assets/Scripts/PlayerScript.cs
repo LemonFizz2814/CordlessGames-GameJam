@@ -9,14 +9,8 @@ public class PlayerScript : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    private GameObject PhysicalMouse;
-
     public UIManager uiManager;
 
-    private Vector3 VScreen = new Vector3();
-
-    //Player's Camera
-    public Camera PlayerCam;
     public GameObject Gun;
 
     //Movement
@@ -29,34 +23,18 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody>();
-
-        PhysicalMouse = new GameObject();
-        PhysicalMouse.name = "PhysicalMouse";
     }
 
     void Update()
     {
         // Gives a value between -1 and 1
-        horizontal = Input.GetAxis("Horizontal"); // -1 is left
-        vertical = Input.GetAxis("Vertical"); // -1 is down
-
-        VScreen.x = Input.mousePosition.x;
-        VScreen.y = Input.mousePosition.y;
-        VScreen.z = PlayerCam.transform.position.z;
-
-        //Rotate to always face the mouse
-        Vector3 LookDirection = PlayerCam.ScreenToWorldPoint(VScreen);
-        PhysicalMouse.transform.position = new Vector3(LookDirection.x, transform.position.y, LookDirection.z);
+        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
 
         //Shoot Gun
         if (Input.GetMouseButtonDown(0))    //Left Click
         {
-            transform.LookAt(PhysicalMouse.transform);
-
-            Vector3 ShootDirection = PhysicalMouse.transform.position - transform.position;
-            ShootDirection = Vector3.Normalize(ShootDirection);
-
-            BulletPool.SharedInstance.Shoot(Gun, ShootDirection);
+            BulletPool.SharedInstance.Shoot(Gun, Gun.transform.forward);
         }
     }
 
@@ -70,6 +48,15 @@ public class PlayerScript : MonoBehaviour
         }
 
         body.velocity = new Vector3(horizontal * runSpeed, 0, vertical * runSpeed);
+
+        //Rotate to always face the mouse
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            transform.LookAt(hit.point);
+        }
     }
 
     public bool GetMilk()
