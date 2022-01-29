@@ -20,6 +20,9 @@ public class PlayerScript : MonoBehaviour
     public float moveLimiter = 0.7f;    //Percentage
     public float runSpeed = 20.0f;
 
+    int ammo;
+    int maxAmmo = 6;
+
     int gangArrowPoint;
 
     bool milk;
@@ -28,10 +31,11 @@ public class PlayerScript : MonoBehaviour
     bool boneDelivered;
     bool arrow;
 
-    float health = 3;
+    int health = 3;
 
     void Start()
     {
+        ammo = maxAmmo;
         body = GetComponent<Rigidbody>();
         ShowArrow(false, 0);
     }
@@ -43,8 +47,10 @@ public class PlayerScript : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
 
         //Shoot Gun
-        if (Input.GetMouseButtonDown(0))    //Left Click
+        if (Input.GetMouseButtonDown(0) && ammo > 0)    //Left Click
         {
+            ammo--;
+            uiManager.UpdateAmmoImages(ammo);
             BulletPool.SharedInstance.Shoot(Gun, Gun.transform.forward);
         }
 
@@ -91,7 +97,7 @@ public class PlayerScript : MonoBehaviour
     {
         return bone;
     }
-    public void HitByBullet(float _damage)
+    public void HitByBullet(int _damage)
     {
         health -= _damage;
         uiManager.UpdateHeartImages(health);

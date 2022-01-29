@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameoverScreen;
     public GameObject winScreen;
     public GameObject heartObj;
+    public GameObject ammoObj;
 
     public TextMeshProUGUI infoText;
 
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
 
     public Sprite[] pickUpSprites;
     public Sprite[] heartSprites;
+    public Sprite[] ammoSprites;
 
     void Start()
     {
@@ -33,11 +35,18 @@ public class UIManager : MonoBehaviour
         pickUpImage.sprite = pickUpSprites[_i];
     }
 
-    public void UpdateHeartImages(float _health)
+    public void UpdateHeartImages(int _health)
     {
         for(int i = 0; i < heartObj.transform.childCount; i++)
         {
             heartObj.transform.GetChild(i).GetComponent<Image>().sprite = (i >= _health) ? heartSprites[0] : heartSprites[1];
+        }
+    }
+    public void UpdateAmmoImages(int _ammo)
+    {
+        for(int i = 0; i < ammoObj.transform.childCount; i++)
+        {
+            ammoObj.transform.GetChild(i).GetComponent<Image>().sprite = (i >= _ammo) ? ammoSprites[0] : ammoSprites[1];
         }
     }
 

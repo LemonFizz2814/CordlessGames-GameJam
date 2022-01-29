@@ -92,16 +92,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gang: 1
-  accuracy: 0.6
+  accuracy: 0.65
   firerate: 0.3
-  speed: 1.5
+  speed: 1.8
   damage: 1
   maxHealth: 5
   attackDelayMin: 0.2
   attackDelayMax: 2
   shootDelay: 0.5
   burstMin: 3
-  burstMax: 10
+  burstMax: 9
 --- !u!195 &3859088608900770509
 NavMeshAgent:
   m_ObjectHideFlags: 0
