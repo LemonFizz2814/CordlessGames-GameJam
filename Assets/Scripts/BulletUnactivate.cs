@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletUnactivate : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         gameObject.SetActive(false);
     }

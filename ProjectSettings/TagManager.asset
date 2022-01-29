@@ -12,6 +12,7 @@ TagManager:
   - DogBoss
   - CatBoss
   - Bone
+  - Start
   layers:
   - Default
   - TransparentFX

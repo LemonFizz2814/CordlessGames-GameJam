@@ -19,6 +19,10 @@ public class PlayerScript : MonoBehaviour
 
     bool milk;
     bool bone;
+    bool milkDelivered;
+    bool boneDelivered;
+
+    float health = 5;
 
     void Start()
     {
@@ -67,28 +71,59 @@ public class PlayerScript : MonoBehaviour
     {
         return bone;
     }
+    public void HitByBullet(float _damage)
+    {
+        health -= _damage;
+
+        HealthCheck();
+    }
+
+    void HealthCheck()
+    {
+        if (health <= 0)
+        {
+            uiManager.ShowGameOverScreen();
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Milk") && !milk && !bone)
+        if (other.CompareTag("Milk") && !milk && !bone)
         {
             milk = true;
             uiManager.PickedUpImage(1);
+            uiManager.TextAnimation("Picked up milk");
             Destroy(other.gameObject);
         }
-        if(other.CompareTag("Bone") && !milk && !bone)
+        if (other.CompareTag("Bone") && !milk && !bone)
         {
             bone = true;
             uiManager.PickedUpImage(2);
+            uiManager.TextAnimation("Picked up bone");
             Destroy(other.gameObject);
         }
-        if(other.CompareTag("CatBoss") && milk)
+        if (other.CompareTag("CatBoss") && milk)
         {
+            uiManager.TextAnimation("Delivered milk to cat boss!");
+            uiManager.PickedUpImage(0);
             milk = false;
+            milkDelivered = true;
         }
-        if(other.CompareTag("DogBoss") && bone)
+        if (other.CompareTag("DogBoss") && bone)
         {
+            uiManager.TextAnimation("Delivered bone to dog boss!");
+            uiManager.PickedUpImage(0);
             bone = false;
+            boneDelivered = true;
+        }
+        if (other.CompareTag("Start") && milkDelivered && boneDelivered)
+        {
+            uiManager.ShowWinScreen();
+            Time.timeScale = 0;
+        }
+        if (other.CompareTag("Bullet"))
+        {
+            HitByBullet(1);
         }
     }
 }

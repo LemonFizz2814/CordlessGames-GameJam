@@ -54,6 +54,8 @@ public class BulletPool : MonoBehaviour
             bullet.transform.position = Parent.transform.position;
             bullet.transform.rotation = Parent.transform.rotation;
             bullet.SetActive(true);
+            bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            bullet.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
             bullet.GetComponent<Rigidbody>().AddForce(Direction * BulletForce, ForceMode.Impulse);
         }
