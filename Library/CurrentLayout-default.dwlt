@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 8}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 333, y: 271}
   m_MaxSize: {x: 14003, y: 10021}
   vertical: 0
-  controlID: 2941
+  controlID: 126
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -96,10 +96,10 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 1307
-  m_MinSize: {x: 677, y: 492}
-  m_MaxSize: {x: 18003, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 134
+  controlID: 56
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -119,8 +119,8 @@ MonoBehaviour:
     y: 0
     width: 569
     height: 1307
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -145,8 +145,8 @@ MonoBehaviour:
     y: 0
     width: 493
     height: 834
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -202,7 +202,7 @@ MonoBehaviour:
     y: 0
     width: 2560
     height: 1357
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &9
 MonoBehaviour:
@@ -268,10 +268,10 @@ MonoBehaviour:
     y: 0
     width: 1991
     height: 1307
-  m_MinSize: {x: 402, y: 492}
+  m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 14003, y: 14042}
   vertical: 1
-  controlID: 35
+  controlID: 57
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -293,10 +293,10 @@ MonoBehaviour:
     y: 0
     width: 1991
     height: 834
-  m_MinSize: {x: 402, y: 221}
-  m_MaxSize: {x: 8002, y: 4021}
+  m_MinSize: {x: 403, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 36
+  controlID: 58
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -534,20 +534,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Models/Characters
+    - Assets/3Dasset
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Models/Characters
+  - Assets/3Dasset
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: A:\Main\Desktop files\MDS\Unity\CordlessGames-GameJam
+  m_LastProjectPath: F:\GameJam\CordlessGames-GameJam
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 723d0000
-    m_LastClickedID: 15730
-    m_ExpandedIDs: 000000005e3d00006a3d0000723d000000ca9a3b
+    m_SelectedIDs: 82380000
+    m_LastClickedID: 14466
+    m_ExpandedIDs: 000000007c38000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -575,7 +575,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005e3d0000
+    m_ExpandedIDs: 000000007c380000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -698,23 +698,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 30350000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 80abb69140acb691c66bfeff2e77feff780efffff80effff760fffff840fffff4c41ffff5241ffff5e42ffffb042ffffb442ffffb842ffffc042ffffc442ffffc842ffffd042ffffd442ffffd842ffffdc42ffffe442ffffe842ffffec42fffff042fffff842fffffc42ffff0043ffff0443ffff0c43ffff1043ffff1643ffff2e43ffff2c5dffffc267ffffc867ffffd267ffffd468ffff9e69ffffa269ffffa669ffffae69ffffb269ffffb669ffffbe69ffffc269ffffc669ffffca69ffffd269ffffd669ffffda69ffffde69ffffe669ffffea69ffffee69fffff269fffff669fffffa69fffffe69ffff046affff1c6affff52f0ffff54f1ffff000000006cc20000
+      m_ExpandedIDs: d6f4ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Dog Enemy
-        m_OriginalName: Dog Enemy
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -48550
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 6}
       m_SearchString: 
@@ -745,8 +745,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 493
-    y: 73
+    x: -31507
+    y: -31970
     width: 1496
     height: 813
   m_ViewDataDictionary: {fileID: 0}
@@ -808,13 +808,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.47017685, y: 0.30652383, z: -0.17816183, w: -0.80827993}
+    m_Target: {x: -0.26903704, y: 0.07881506, z: -0.021963209, w: -0.9596888}
     speed: 2
-    m_Value: {x: -0.47056103, y: 0.3098746, z: -0.18073356, w: -0.80615467}
+    m_Value: {x: -0.26899332, y: 0.08025138, z: -0.02236587, w: -0.9595322}
   m_Size:
-    m_Target: 7.608698
+    m_Target: 22.867443
     speed: 2
-    m_Value: 7.2810507
+    m_Value: 21.88272
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -890,8 +890,8 @@ MonoBehaviour:
     vZoomLockedByDefault: 0
     m_HBaseRangeMin: -748
     m_HBaseRangeMax: 748
-    m_VBaseRangeMin: -396
-    m_VBaseRangeMax: 396
+    m_VBaseRangeMin: -406.5
+    m_VBaseRangeMax: 406.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -908,11 +908,11 @@ MonoBehaviour:
     m_DrawArea:
       serializedVersion: 2
       x: 0
-      y: 21
+      y: 0
       width: 1496
-      height: 792
+      height: 813
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 748, y: 396}
+    m_Translation: {x: 748, y: 406.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -920,9 +920,9 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -748
-      y: -396
+      y: -406.5
       width: 1496
-      height: 792
+      height: 813
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 1496, y: 813}
