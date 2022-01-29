@@ -3412,11 +3412,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cat Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 7417333372178919069, guid: 05258c013244a594b85d89213ce38ef5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7900573561917518887, guid: 05258c013244a594b85d89213ce38ef5,
         type: 3}
       propertyPath: m_RootOrder
@@ -4133,11 +4128,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7034888222896888077, guid: 831c433096f99cd43b184a5a79f1c4c3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7704288130788574135, guid: 831c433096f99cd43b184a5a79f1c4c3,
         type: 3}
