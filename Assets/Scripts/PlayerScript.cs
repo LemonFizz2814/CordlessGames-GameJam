@@ -27,6 +27,9 @@ public class PlayerScript : MonoBehaviour
     public float moveLimiter = 0.7f;    //Percentage
     public float runSpeed = 20.0f;
 
+    public ParticleSystem muzzle;
+    public ParticleSystem blood;
+
     int ammo;
     int maxAmmo = 6;
 
@@ -71,6 +74,8 @@ public class PlayerScript : MonoBehaviour
         {
             ammo--;
             uiManager.UpdateAmmoImages(ammo);
+
+            muzzle.Play();
 
             //Plays the noise
             GetComponent<AudioSource>().clip = GunShotSFX;
@@ -130,6 +135,7 @@ public class PlayerScript : MonoBehaviour
     public void HitByBullet(int _damage)
     {
         health -= _damage;
+        muzzle.Play();
 
         //Plays the noise
         GetComponent<AudioSource>().clip = gotShotSFX;

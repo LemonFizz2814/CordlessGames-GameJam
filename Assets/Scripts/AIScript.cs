@@ -35,6 +35,9 @@ public class AIScript : MonoBehaviour
 
     private Animator anim;
 
+    public ParticleSystem muzzle;
+    public ParticleSystem blood;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -167,6 +170,7 @@ public class AIScript : MonoBehaviour
             Vector3 dir = (transform.position - attackTarget.position).normalized;
             Vector3 accuracy = new Vector3(dir.x + Random.Range(-properties.accuracy, properties.accuracy), dir.y, dir.z + Random.Range(-properties.accuracy, properties.accuracy));
             bulletPool.Shoot(transform.GetChild(1).gameObject, -accuracy, "Bullet");
+            muzzle.Play();
             yield return new WaitForSeconds(properties.firerate);
         }
 
@@ -200,6 +204,7 @@ public class AIScript : MonoBehaviour
     public void HitByBullet(float _damage)
     {
         health -= _damage;
+        blood.Play();
 
         HealthCheck();
     }

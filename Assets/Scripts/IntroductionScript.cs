@@ -12,7 +12,7 @@ public class IntroductionScript : MonoBehaviour
 
     IEnumerator Timer()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(25);
         SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("level"));
     }
 }
