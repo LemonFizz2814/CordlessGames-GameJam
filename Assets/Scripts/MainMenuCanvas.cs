@@ -13,6 +13,7 @@ public class MainMenuCanvas : MonoBehaviour
     public void PlayBTN()
     {
         SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("level"));
+        SceneManager.LoadScene("Introduction");
     }
 
     public void QuitBTN()
