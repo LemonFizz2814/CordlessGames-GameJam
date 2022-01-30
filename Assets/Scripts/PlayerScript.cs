@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviour
         {
             ammo--;
             uiManager.UpdateAmmoImages(ammo);
-            BulletPool.SharedInstance.Shoot(Gun, Gun.transform.forward);
+            BulletPool.SharedInstance.Shoot(Gun, Gun.transform.forward, "PlayerBullet");
         }
 
         if(arrow)
@@ -156,6 +156,18 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             HitByBullet(1);
+        }
+        if (other.CompareTag("Health"))
+        {
+            health++;
+            uiManager.UpdateHeartImages(health);
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Ammo"))
+        {
+            ammo++;
+            uiManager.UpdateAmmoImages(ammo);
+            Destroy(other.gameObject);
         }
     }
 }

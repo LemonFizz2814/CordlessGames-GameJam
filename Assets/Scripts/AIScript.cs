@@ -111,9 +111,11 @@ public class AIScript : MonoBehaviour
     {
         if(other.CompareTag("Bullet"))
         {
-            print("hurt");
-            //Destroy(other.gameObject);
             HitByBullet(properties.damage);
+        }
+        if(other.CompareTag("PlayerBullet"))
+        {
+            HitByBullet(5);
         }
     }
 
@@ -144,7 +146,7 @@ public class AIScript : MonoBehaviour
         {
             Vector3 dir = (transform.position - attackTarget.position).normalized;
             Vector3 accuracy = new Vector3(dir.x + Random.Range(-properties.accuracy, properties.accuracy), dir.y, dir.z + Random.Range(-properties.accuracy, properties.accuracy));
-            bulletPool.Shoot(transform.GetChild(1).gameObject, -accuracy);
+            bulletPool.Shoot(transform.GetChild(1).gameObject, -accuracy, "Bullet");
             yield return new WaitForSeconds(properties.firerate);
         }
 
@@ -192,8 +194,6 @@ public class AIScript : MonoBehaviour
 
     void AIDied()
     {
-        print("dead");
-
         active = false;
         //agent.isStopped = true;
         agent.enabled = false;

@@ -13,6 +13,9 @@ TagManager:
   - CatBoss
   - Bone
   - Start
+  - PlayerBullet
+  - Ammo
+  - Health
   layers:
   - Default
   - TransparentFX

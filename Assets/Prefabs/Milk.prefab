@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2349976695238771296}
   - component: {fileID: 2349976695238771299}
+  - component: {fileID: 1935495032080479335}
   m_Layer: 0
   m_Name: Milk
   m_TagString: Milk
@@ -45,6 +46,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1935495032080479335
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2349976695238771298}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b775ad9147df4714f9559e149082d2a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1269431279029611651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,17 +80,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.37634507
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.37634507
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.37634507
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
@@ -90,27 +110,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b3c604c5753c1b40abe3b922730fba7,
         type: 3}

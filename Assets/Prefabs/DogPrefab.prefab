@@ -94,7 +94,7 @@ MonoBehaviour:
   gang: 1
   accuracy: 0.65
   firerate: 0.3
-  speed: 1.8
+  speed: 1.6
   damage: 1
   maxHealth: 5
   attackDelayMin: 0.2

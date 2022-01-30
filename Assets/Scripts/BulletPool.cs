@@ -45,9 +45,11 @@ public class BulletPool : MonoBehaviour
         return null;
     }
 
-    public void Shoot(GameObject Parent, Vector3 Direction)
+    public void Shoot(GameObject Parent, Vector3 Direction, string tag)
     {
         GameObject bullet = BulletPool.SharedInstance.GetBullet();
+
+        bullet.transform.tag = tag;
 
         if (bullet != null)
         {
@@ -58,6 +60,7 @@ public class BulletPool : MonoBehaviour
             bullet.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
             bullet.GetComponent<Rigidbody>().AddForce(Direction * BulletForce, ForceMode.Impulse);
+            bullet.transform.forward = bullet.GetComponent<Rigidbody>().velocity;
         }
     }
 }
