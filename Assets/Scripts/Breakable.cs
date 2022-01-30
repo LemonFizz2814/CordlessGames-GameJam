@@ -49,15 +49,17 @@ public class Breakable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet"))
+        print(other.tag);
+
+        if (other.CompareTag("PlayerBullet") || other.CompareTag("Bullet"))
         {
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<BoxCollider>().enabled = false;
 
             BrokenObject.SetActive(true);
 
-            Vector3 explosionPos = transform.position;
 
+            GetComponent<AudioSource>().Play();
 
             for (int i = 0; i < childs.Count; i++)
             {
