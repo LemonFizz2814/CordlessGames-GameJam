@@ -9,6 +9,8 @@ public class PlayerScript : MonoBehaviour
     private float horizontal;
     private float vertical;
 
+    private Animator anim;
+
     public UIManager uiManager;
 
     public GameObject Gun;
@@ -43,6 +45,8 @@ public class PlayerScript : MonoBehaviour
         ammo = maxAmmo;
         body = GetComponent<Rigidbody>();
         ShowArrow(false, 0);
+
+        anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     void Update()
@@ -50,6 +54,16 @@ public class PlayerScript : MonoBehaviour
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+
+        if (horizontal + vertical != 0 && !anim.GetCurrentAnimatorStateInfo(0).IsName("Run")) 
+        {
+            anim.SetBool("Run", true);
+        }
+
+        if (horizontal + vertical == 0)
+        {
+            anim.SetBool("Run", false);
+        }
 
         //Shoot Gun
         if (Input.GetMouseButtonDown(0) && ammo > 0)    //Left Click
@@ -59,6 +73,9 @@ public class PlayerScript : MonoBehaviour
 
             //Plays the noise
             GetComponent<AudioSource>().clip = GunShotSFX;
+
+            GetComponent<AudioSource>().pitch = (Random.Range(-3.0f, 3.0f));
+
             GetComponent<AudioSource>().Play();
 
             BulletPool.SharedInstance.Shoot(Gun, Gun.transform.forward, "PlayerBullet");
@@ -75,6 +92,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (horizontal != 0 && vertical != 0) // Check for diagonal movement
         {
+            anim.Play("Run");
+
             // limit movement speed diagonally, so you move at 70% speed
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
