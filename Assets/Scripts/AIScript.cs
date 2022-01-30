@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class AIScript : MonoBehaviour
 {
-    int layerMask = 1 << 8;
-
     enum DecisionStates
     {
         Idle,
@@ -51,25 +49,28 @@ public class AIScript : MonoBehaviour
 
     private void Update()
     {
-        if (active && (decision == DecisionStates.Walking || decision == DecisionStates.Idle))
+        if (decision != DecisionStates.Dead)
         {
-            if(!CheckForEnemies() && decision == DecisionStates.Idle)
+            if (active && (decision == DecisionStates.Walking || decision == DecisionStates.Idle))
+            {
+                if (!CheckForEnemies() && decision == DecisionStates.Idle)
+                {
+                    //StopAllCoroutines();
+                    StartCoroutine(PickTargetPosition());
+                }
+            }
+
+            //Walking Animation
+            if (decision == DecisionStates.Walking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+            {
+                anim.Play("Run");
+            }
+
+            if (agent.remainingDistance < 1)
             {
                 //StopAllCoroutines();
                 StartCoroutine(PickTargetPosition());
             }
-        }
-
-        //Walking Animation
-        if (decision == DecisionStates.Walking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Run"))
-        {
-            anim.Play("Run");
-        }
-
-        if (agent.remainingDistance < 1)
-        {
-            //StopAllCoroutines();
-            StartCoroutine(PickTargetPosition());
         }
     }
 
@@ -207,16 +208,22 @@ public class AIScript : MonoBehaviour
     {
         if(health <= 0)
         {
-            AIDied();
+            StopAllCoroutines();
+            StartCoroutine(AIDied());
         }
     }
 
-    void AIDied()
+    IEnumerator AIDied()
     {
+        decision = DecisionStates.Dead;
         active = false;
         //agent.isStopped = true;
         agent.enabled = false;
-        gameObject.SetActive(false);
+        anim.SetBool("Death", true);
+
+        yield return new WaitForSeconds(2);
         gangController.RemoveAI((int)properties.gang, gameObject);
+
+        gameObject.SetActive(false);
     }
 }

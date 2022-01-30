@@ -42,6 +42,7 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         ammo = maxAmmo;
         body = GetComponent<Rigidbody>();
         ShowArrow(false, 0);
@@ -228,7 +229,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (other.CompareTag("Ammo"))
         {
-            ammo++;
+            ammo += 3;
             uiManager.UpdateAmmoImages(ammo);
 
             //Plays the noise
