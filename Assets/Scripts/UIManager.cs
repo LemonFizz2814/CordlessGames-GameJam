@@ -17,12 +17,18 @@ public class UIManager : MonoBehaviour
 
     public Image pickUpImage;
 
+    public Slider barSlider;
+
     public Sprite[] pickUpSprites;
     public Sprite[] heartSprites;
     public Sprite[] ammoSprites;
 
+    int totalLevels = 3;
+
     void Start()
     {
+        barSlider.value = 1;
+
         gameplayScreen.SetActive(true);
         gameoverScreen.SetActive(false);
         winScreen.SetActive(false);
@@ -50,6 +56,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ChangeBar(int _i)
+    {
+        barSlider.value = _i;
+    }
+
     public void ShowWinScreen()
     {
         gameplayScreen.SetActive(false);
@@ -73,8 +84,15 @@ public class UIManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("level") + 1);
-        SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("level"));
+        if ((PlayerPrefs.GetInt("level") + 1) <= totalLevels)
+        {
+            PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("level") + 1);
+            SceneManager.LoadScene("Level" + PlayerPrefs.GetInt("level"));
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
     public void RestartLevel()
     {

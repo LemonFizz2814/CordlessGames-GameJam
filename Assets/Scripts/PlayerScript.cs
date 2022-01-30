@@ -136,6 +136,7 @@ public class PlayerScript : MonoBehaviour
             milk = true;
             uiManager.PickedUpImage(1);
             uiManager.TextAnimation("Picked up milk");
+            uiManager.ChangeBar(2);
 
             //Plays the noise
             GetComponent<AudioSource>().clip = PickUpSFX;
@@ -149,6 +150,7 @@ public class PlayerScript : MonoBehaviour
             bone = true;
             uiManager.PickedUpImage(2);
             uiManager.TextAnimation("Picked up bone");
+            uiManager.ChangeBar(0);
 
             //Plays the noise
             GetComponent<AudioSource>().clip = PickUpSFX;
@@ -160,6 +162,7 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("CatBoss") && milk)
         {
             uiManager.TextAnimation("Delivered milk to cat boss!");
+            uiManager.ChangeBar(1);
 
             //Plays the noise
             GetComponent<AudioSource>().clip = giveItemSFX;
@@ -173,6 +176,7 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("DogBoss") && bone)
         {
             uiManager.TextAnimation("Delivered bone to dog boss!");
+            uiManager.ChangeBar(1);
 
             //Plays the noise
             GetComponent<AudioSource>().clip = giveItemSFX;
