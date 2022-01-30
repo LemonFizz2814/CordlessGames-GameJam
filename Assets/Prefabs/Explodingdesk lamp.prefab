@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8284074544342073426}
   - component: {fileID: 8284074544342073437}
   m_Layer: 0
-  m_Name: desk lamp
+  m_Name: Explodingdesk lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 2ed48be6ae363554ea98e6995762aaa2, type: 3}
+  - {fileID: 2100000, guid: f260ef9e842ed834797c3157eedc457c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

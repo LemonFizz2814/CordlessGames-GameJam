@@ -41,12 +41,14 @@ public class PlayerScript : MonoBehaviour
     bool boneDelivered;
     bool arrow;
 
-    int health = 3;
+    int health;
+    int maxHealth = 3;
 
     void Start()
     {
         Time.timeScale = 1;
         ammo = maxAmmo;
+        health = maxHealth;
         body = GetComponent<Rigidbody>();
         ShowArrow(false, 0);
 
@@ -241,6 +243,7 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("Health"))
         {
             health++;
+            health = Mathf.Clamp(health, 0, maxHealth);
             uiManager.UpdateHeartImages(health);
 
             //Plays the noise
@@ -252,6 +255,7 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("Ammo"))
         {
             ammo += 3;
+            ammo = Mathf.Clamp(ammo, 0, maxAmmo);
             uiManager.UpdateAmmoImages(ammo);
 
             //Plays the noise

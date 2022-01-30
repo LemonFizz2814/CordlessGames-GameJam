@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 688040403379460601}
   - component: {fileID: 688040403379460602}
   m_Layer: 0
-  m_Name: teaTable
+  m_Name: ExplodingteaTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 05e5a6d4c7e6a634e87ffbaf71114b67, type: 3}
+  - {fileID: 2100000, guid: f260ef9e842ed834797c3157eedc457c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
