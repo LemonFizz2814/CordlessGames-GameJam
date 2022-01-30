@@ -150,6 +150,7 @@ MonoBehaviour:
   bossLocations:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   moveLimiter: 0.7
   runSpeed: 5
 --- !u!82 &1296063443535138813
