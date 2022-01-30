@@ -96,7 +96,7 @@ MonoBehaviour:
   firerate: 0.3
   speed: 1.6
   damage: 1
-  maxHealth: 5
+  maxHealth: 6
   attackDelayMin: 0.2
   attackDelayMax: 2
   shootDelay: 0.5

@@ -46,16 +46,18 @@ public class AIScript : MonoBehaviour
 
     private void Update()
     {
-        if (active && decision == DecisionStates.Walking || decision == DecisionStates.Idle)
+        if (active && (decision == DecisionStates.Walking || decision == DecisionStates.Idle))
         {
             if(!CheckForEnemies() && decision == DecisionStates.Idle)
             {
+                //StopAllCoroutines();
                 StartCoroutine(PickTargetPosition());
             }
         }
 
         if(agent.remainingDistance < 1)
         {
+            //StopAllCoroutines();
             StartCoroutine(PickTargetPosition());
         }
     }
@@ -84,6 +86,7 @@ public class AIScript : MonoBehaviour
             {
                 if (hit.transform.CompareTag(oppositeGangName))
                 {
+                    StopAllCoroutines();
                     StartCoroutine(Attack(nearestGangMember.transform));
                     return true;
                 }
@@ -115,7 +118,7 @@ public class AIScript : MonoBehaviour
         }
         if(other.CompareTag("PlayerBullet"))
         {
-            HitByBullet(5);
+            HitByBullet(10);
         }
     }
 
@@ -135,15 +138,13 @@ public class AIScript : MonoBehaviour
         agent.isStopped = true;
         attackTarget = _attackTarget;
 
-        var _direction = (attackTarget.position - transform.position).normalized;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_direction), 1);
-
-
-
         var burst = Random.Range(properties.burstMin, properties.burstMax);
 
         for(int i = 0; i < burst; i++)
         {
+            var _direction = (attackTarget.position - transform.position).normalized;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_direction), 1);
+
             Vector3 dir = (transform.position - attackTarget.position).normalized;
             Vector3 accuracy = new Vector3(dir.x + Random.Range(-properties.accuracy, properties.accuracy), dir.y, dir.z + Random.Range(-properties.accuracy, properties.accuracy));
             bulletPool.Shoot(transform.GetChild(1).gameObject, -accuracy, "Bullet");

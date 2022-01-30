@@ -59,8 +59,12 @@ public class BulletPool : MonoBehaviour
             bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
             bullet.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
-            bullet.GetComponent<Rigidbody>().AddForce(Direction * BulletForce, ForceMode.Impulse);
-            bullet.transform.forward = bullet.GetComponent<Rigidbody>().velocity;
+            bullet.GetComponent<TrailRenderer>().Clear();
+
+            bullet.transform.forward = Direction;
+
+            //bullet.GetComponent<Rigidbody>().AddForce(Direction * BulletForce, ForceMode.Impulse);
+            //bullet.transform.forward = bullet.GetComponent<Rigidbody>().velocity;
         }
     }
 }
