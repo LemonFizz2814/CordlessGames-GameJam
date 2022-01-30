@@ -14,6 +14,11 @@ public class PlayerScript : MonoBehaviour
     public GameObject Gun;
     public GameObject arrowObj;
 
+    public AudioClip GunShotSFX;
+    public AudioClip PickUpSFX;
+    public AudioClip gotShotSFX;
+    public AudioClip giveItemSFX;
+
     public Transform[] bossLocations;
 
     //Movement
@@ -51,6 +56,11 @@ public class PlayerScript : MonoBehaviour
         {
             ammo--;
             uiManager.UpdateAmmoImages(ammo);
+
+            //Plays the noise
+            GetComponent<AudioSource>().clip = GunShotSFX;
+            GetComponent<AudioSource>().Play();
+
             BulletPool.SharedInstance.Shoot(Gun, Gun.transform.forward, "PlayerBullet");
         }
 
@@ -100,6 +110,11 @@ public class PlayerScript : MonoBehaviour
     public void HitByBullet(int _damage)
     {
         health -= _damage;
+
+        //Plays the noise
+        GetComponent<AudioSource>().clip = gotShotSFX;
+        GetComponent<AudioSource>().Play();
+
         uiManager.UpdateHeartImages(health);
 
         HealthCheck();
@@ -121,6 +136,12 @@ public class PlayerScript : MonoBehaviour
             milk = true;
             uiManager.PickedUpImage(1);
             uiManager.TextAnimation("Picked up milk");
+            uiManager.ChangeBar(2);
+
+            //Plays the noise
+            GetComponent<AudioSource>().clip = PickUpSFX;
+            GetComponent<AudioSource>().Play();
+
             ShowArrow(true, 0);
             Destroy(other.gameObject);
         }
@@ -129,12 +150,24 @@ public class PlayerScript : MonoBehaviour
             bone = true;
             uiManager.PickedUpImage(2);
             uiManager.TextAnimation("Picked up bone");
+            uiManager.ChangeBar(0);
+
+            //Plays the noise
+            GetComponent<AudioSource>().clip = PickUpSFX;
+            GetComponent<AudioSource>().Play();
+
             ShowArrow(true, 1);
             Destroy(other.gameObject);
         }
         if (other.CompareTag("CatBoss") && milk)
         {
             uiManager.TextAnimation("Delivered milk to cat boss!");
+            uiManager.ChangeBar(1);
+
+            //Plays the noise
+            GetComponent<AudioSource>().clip = giveItemSFX;
+            GetComponent<AudioSource>().Play();
+
             uiManager.PickedUpImage(0);
             milk = false;
             milkDelivered = true;
@@ -143,6 +176,12 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("DogBoss") && bone)
         {
             uiManager.TextAnimation("Delivered bone to dog boss!");
+            uiManager.ChangeBar(1);
+
+            //Plays the noise
+            GetComponent<AudioSource>().clip = giveItemSFX;
+            GetComponent<AudioSource>().Play();
+
             uiManager.PickedUpImage(0);
             bone = false;
             boneDelivered = true;
@@ -161,12 +200,22 @@ public class PlayerScript : MonoBehaviour
         {
             health++;
             uiManager.UpdateHeartImages(health);
+
+            //Plays the noise
+            GetComponent<AudioSource>().clip = PickUpSFX;
+            GetComponent<AudioSource>().Play();
+
             Destroy(other.gameObject);
         }
         if (other.CompareTag("Ammo"))
         {
             ammo++;
             uiManager.UpdateAmmoImages(ammo);
+
+            //Plays the noise
+            GetComponent<AudioSource>().clip = PickUpSFX;
+            GetComponent<AudioSource>().Play();
+
             Destroy(other.gameObject);
         }
     }

@@ -30,6 +30,8 @@ public class AIScript : MonoBehaviour
 
     BulletPool bulletPool;
 
+    PlayerScript player;
+
     bool active = false;
     float health;
 
@@ -69,6 +71,11 @@ public class AIScript : MonoBehaviour
 
         var oppositeGang = gangController.GetGangMembers(gangController.GetOppositeGangFaction((int)properties.gang));
 
+        if(player.GetBone() || player.GetMilk())
+        {
+            oppositeGang.Add(player.gameObject);
+        }
+
         for (int i = 0; i < oppositeGang.Count; i++)
         {
             if (Vector3.Distance(transform.position, oppositeGang[i].transform.position) < closest)
@@ -97,6 +104,8 @@ public class AIScript : MonoBehaviour
 
     public void SpawnedIn(GangController _gangController, BulletPool _bulletPool)
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
+
         active = true;
 
         agent.enabled = true;

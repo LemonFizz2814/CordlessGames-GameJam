@@ -96,12 +96,12 @@ MonoBehaviour:
   firerate: 0.3
   speed: 1.6
   damage: 1
-  maxHealth: 6
-  attackDelayMin: 0.2
+  maxHealth: 7
+  attackDelayMin: 0.1
   attackDelayMax: 2
   shootDelay: 0.5
   burstMin: 3
-  burstMax: 9
+  burstMax: 10
 --- !u!195 &3859088608900770509
 NavMeshAgent:
   m_ObjectHideFlags: 0
