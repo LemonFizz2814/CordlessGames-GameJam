@@ -3400,6 +3400,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8683875177717658252, guid: 94184da5d67cff143b45a5a9246aabf3,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1533234920}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94184da5d67cff143b45a5a9246aabf3, type: 3}
 --- !u!114 &726239201 stripped
@@ -4210,7 +4215,7 @@ PrefabInstance:
       objectReference: {fileID: 726239201}
     - target: {fileID: 1031441329, guid: e9aa4ec2febe43a40b69701532d841af, type: 3}
       propertyPath: bossLocations.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1031441329, guid: e9aa4ec2febe43a40b69701532d841af, type: 3}
       propertyPath: bossLocations.Array.data[0]
@@ -4220,6 +4225,10 @@ PrefabInstance:
       propertyPath: bossLocations.Array.data[1]
       value: 
       objectReference: {fileID: 496638725}
+    - target: {fileID: 1031441329, guid: e9aa4ec2febe43a40b69701532d841af, type: 3}
+      propertyPath: bossLocations.Array.data[2]
+      value: 
+      objectReference: {fileID: 436817648}
     - target: {fileID: 28769481464454238, guid: e9aa4ec2febe43a40b69701532d841af,
         type: 3}
       propertyPath: m_IsActive
