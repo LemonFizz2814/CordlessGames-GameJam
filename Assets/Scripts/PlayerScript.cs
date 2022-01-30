@@ -80,7 +80,7 @@ public class PlayerScript : MonoBehaviour
             //Plays the noise
             GetComponent<AudioSource>().clip = GunShotSFX;
 
-            GetComponent<AudioSource>().pitch = (Random.Range(-3.0f, 3.0f));
+            GetComponent<AudioSource>().pitch = (Random.Range(-1.0f, 1.0f));
 
             GetComponent<AudioSource>().Play();
 
