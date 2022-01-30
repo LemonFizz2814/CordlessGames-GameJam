@@ -35,10 +35,13 @@ public class AIScript : MonoBehaviour
     bool active = false;
     float health;
 
+    private Animator anim;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         properties = GetComponent<AIProperties>();
+        anim = transform.GetChild(0).GetComponent<Animator>();
 
         active = false;
         //agent.isStopped = true;
@@ -57,7 +60,13 @@ public class AIScript : MonoBehaviour
             }
         }
 
-        if(agent.remainingDistance < 1)
+        //Walking Animation
+        if (decision == DecisionStates.Walking && !anim.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+        {
+            anim.Play("Run");
+        }
+
+        if (agent.remainingDistance < 1)
         {
             //StopAllCoroutines();
             StartCoroutine(PickTargetPosition());
