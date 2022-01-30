@@ -7,7 +7,9 @@ public class Breakable : MonoBehaviour
     public GameObject BrokenObjectPrefab;
     private GameObject BrokenObject;
 
-    public List<Transform> childs = new List<Transform>();
+    private List<Transform> childs = new List<Transform>();
+
+    public float powerLimit = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +32,10 @@ public class Breakable : MonoBehaviour
         for (int i = 0; i < childs.Count; i++)
         {
             childs[i].gameObject.AddComponent<Rigidbody>();
-        }
-    }
 
-    private void Update()
-    {
-        BrokenObject.transform.position = transform.position;
-        BrokenObject.transform.rotation = transform.rotation;
+            childs[i].gameObject.AddComponent<MeshCollider>();
+            childs[i].gameObject.GetComponent<MeshCollider>().convex = enabled;
+        }
     }
 
     public void FindEveryChild(Transform parent)
@@ -55,8 +54,18 @@ public class Breakable : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<BoxCollider>().enabled = false;
 
-            BrokenObject.SetActive(false);
+            BrokenObject.SetActive(true);
+
+            Vector3 explosionPos = transform.position;
+
+
+            for (int i = 0; i < childs.Count; i++)
+            {
+                Vector3 Direction = childs[i].position - transform.position;
+                Direction = Vector3.Normalize(Direction);
+
+                childs[i].GetComponent<Rigidbody>().AddForce(Direction * Random.Range(5, powerLimit), ForceMode.Impulse);
+            }
         }
     }
-
 }
