@@ -42,6 +42,7 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         ammo = maxAmmo;
         body = GetComponent<Rigidbody>();
         ShowArrow(false, 0);
@@ -190,7 +191,15 @@ public class PlayerScript : MonoBehaviour
             uiManager.PickedUpImage(0);
             milk = false;
             milkDelivered = true;
-            ShowArrow(false, 0);
+
+            if (boneDelivered)
+            {
+                ShowArrow(true, 2);
+            }
+            else
+            {
+                ShowArrow(false, 0);
+            }
         }
         if (other.CompareTag("DogBoss") && bone)
         {
@@ -204,7 +213,15 @@ public class PlayerScript : MonoBehaviour
             uiManager.PickedUpImage(0);
             bone = false;
             boneDelivered = true;
-            ShowArrow(false, 0);
+
+            if(milkDelivered)
+            {
+                ShowArrow(true, 2);
+            }
+            else
+            {
+                ShowArrow(false, 0);
+            }
         }
         if (other.CompareTag("Start") && milkDelivered && boneDelivered)
         {
@@ -228,7 +245,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (other.CompareTag("Ammo"))
         {
-            ammo++;
+            ammo += 3;
             uiManager.UpdateAmmoImages(ammo);
 
             //Plays the noise

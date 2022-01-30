@@ -150,6 +150,7 @@ MonoBehaviour:
   bossLocations:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   moveLimiter: 0.7
   runSpeed: 5
 --- !u!82 &1296063443535138813
@@ -274,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 3885902319247681565}
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: -0.3, z: 1.638}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 5817308925750874389}
   m_RootOrder: 0

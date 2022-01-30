@@ -5788,6 +5788,10 @@ PrefabInstance:
       propertyPath: bossLocations.Array.data[1]
       value: 
       objectReference: {fileID: 496638725}
+    - target: {fileID: 1031441329, guid: e9aa4ec2febe43a40b69701532d841af, type: 3}
+      propertyPath: bossLocations.Array.data[2]
+      value: 
+      objectReference: {fileID: 436817648}
     - target: {fileID: 2858300002564857610, guid: e9aa4ec2febe43a40b69701532d841af,
         type: 3}
       propertyPath: m_RootOrder
